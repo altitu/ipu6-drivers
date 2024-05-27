@@ -20,6 +20,10 @@
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-fwnode.h>
 #include <media/v4l2-subdev.h>
+#include <linux/string.h>
+
+// Add this prototype if v4l2_subdev_get_try_format is used
+static struct v4l2_mbus_framefmt *v4l2_subdev_get_try_format(struct v4l2_subdev *sd, struct v4l2_subdev_state *state, unsigned int pad);
 
 /* External clock frequency supported by the driver */
 #define GC5035_MCLK_RATE				24000000UL

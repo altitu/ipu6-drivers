@@ -1,0 +1,97 @@
+config VIDEO_GC5035
+    tristate "GC5035 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the GC5035 camera sensor.
+
+config VIDEO_HI556
+    tristate "HI556 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the HI556 camera sensor.
+
+config VIDEO_HM11B1
+    tristate "HM11B1 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the HM11B1 camera sensor.
+
+config VIDEO_HM2170
+    tristate "HM2170 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the HM2170 camera sensor.
+
+config VIDEO_HM2172
+    tristate "HM2172 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the HM2172 camera sensor.
+
+config VIDEO_OV01A10
+    tristate "OV01A10 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV01A10 camera sensor.
+
+config VIDEO_OV01A1S
+    tristate "OV01A1S sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV01A1S camera sensor.
+
+config VIDEO_OV02C10
+    tristate "OV02C10 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV02C10 camera sensor.
+
+config VIDEO_OV02E10
+    tristate "OV02E10 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV02E10 camera sensor.
+
+config VIDEO_OV08A10
+    tristate "OV08A10 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV08A10 camera sensor.
+
+config VIDEO_OV13858_INTEL
+    tristate "OV13858 Intel sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV13858 Intel camera sensor.
+
+config VIDEO_OV2740
+    tristate "OV2740 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV2740 camera sensor.
+
+config VIDEO_OV8856
+    tristate "OV8856 sensor driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the OV8856 camera sensor.
+
+config VIDEO_POWER_CTRL_LOGIC
+    tristate "Power control logic driver"
+    depends on I2C && VIDEO_V4L2
+    select VIDEOBUF2_CORE
+    ---help---
+      This is a V4L2 driver for the power control logic.
