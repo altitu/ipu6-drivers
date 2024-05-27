@@ -11,3 +11,4 @@ subdir-ccflags-y += $(call cc-disable-warning, type-limits)
 subdir-ccflags-$(CONFIG_VIDEO_INTEL_IPU_WERROR) += -Werror
 
 obj-$(CONFIG_VIDEO_INTEL_IPU6)	+= ipu6/
+obj-m += drivers/pci/intel/spi_driver.o
