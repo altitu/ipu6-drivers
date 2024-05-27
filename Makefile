@@ -114,6 +114,6 @@ subdir-ccflags-y += $(subdir-ccflags-m)
 all:
 	$(MAKE) -C $(KERNEL_SRC) M=$(MODSRC) modules
 modules_install:
-	$(MAKE) INSTALL_MOD_PATH=$(MODSRC)/modules INSTALL_MOD_DIR=kernel -C $(KERNEL_SRC) M=$(MODSRC) modules_install
+	$(MAKE) INSTALL_MOD_PATH=$(MODSRC)/modules INSTALL_MOD_PATH=$out INSTALL_MOD_PATH=$out INSTALL_MOD_PATH=$out INSTALL_MOD_DIR=kernel -C $(KERNEL_SRC) M=$(MODSRC) modules_install
 clean:
 	$(MAKE) -C $(KERNEL_SRC) M=$(MODSRC) clean
