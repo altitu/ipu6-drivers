@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (C) 2013 - 2024 Intel Corporation
 
+#include <media/v4l2-subdev.h>
 #include <linux/types.h>
 #include <linux/videodev2.h>
 
@@ -159,11 +160,11 @@ struct v4l2_mbus_framefmt *__ipu_isys_get_ffmt(struct v4l2_subdev *sd,
 		return &asd->ffmt[pad];
 	else
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 0)
-		return v4l2_subdev_get_try_format(cfg, pad);
+		return v4l2_subdev_get_fmt(cfg, pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
-		return v4l2_subdev_get_try_format(sd, cfg, pad);
+		return v4l2_subdev_get_fmt(sd, cfg, pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		return v4l2_subdev_get_try_format(sd, state, pad);
+		return v4l2_subdev_get_fmt(sd, state, pad);
 #else
 		return v4l2_subdev_state_get_format(state, pad);
 #endif
@@ -193,19 +194,19 @@ struct v4l2_rect *__ipu_isys_get_selection(struct v4l2_subdev *sd,
 		switch (target) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 0)
 		case V4L2_SEL_TGT_CROP:
-			return v4l2_subdev_get_try_crop(cfg, pad);
+			return v4l2_subdev_state_get_crop(cfg, pad);
 		case V4L2_SEL_TGT_COMPOSE:
-			return v4l2_subdev_get_try_compose(cfg, pad);
+			return v4l2_subdev_state_get_compose(cfg, pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
 		case V4L2_SEL_TGT_CROP:
-			return v4l2_subdev_get_try_crop(sd, cfg, pad);
+			return v4l2_subdev_state_get_crop(sd, cfg, pad);
 		case V4L2_SEL_TGT_COMPOSE:
-			return v4l2_subdev_get_try_compose(sd, cfg, pad);
+			return v4l2_subdev_state_get_compose(sd, cfg, pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
 		case V4L2_SEL_TGT_CROP:
-			return v4l2_subdev_get_try_crop(sd, state, pad);
+			return v4l2_subdev_state_get_crop(sd, state, pad);
 		case V4L2_SEL_TGT_COMPOSE:
-			return v4l2_subdev_get_try_compose(sd, state, pad);
+			return v4l2_subdev_state_get_compose(sd, state, pad);
 #else
 		case V4L2_SEL_TGT_CROP:
 			return v4l2_subdev_state_get_crop(state, pad);
@@ -750,25 +751,25 @@ int ipu_isys_subdev_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	for (i = 0; i < asd->sd.entity.num_pads; i++) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 0)
 		struct v4l2_mbus_framefmt *try_fmt =
-			v4l2_subdev_get_try_format(fh, i);
+			v4l2_subdev_get_fmt(fh, i);
 		struct v4l2_rect *try_crop =
-			v4l2_subdev_get_try_crop(fh, i);
+			v4l2_subdev_state_get_crop(fh, i);
 		struct v4l2_rect *try_compose =
-			v4l2_subdev_get_try_compose(fh, i);
+			v4l2_subdev_state_get_compose(fh, i);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
 		struct v4l2_mbus_framefmt *try_fmt =
-			v4l2_subdev_get_try_format(sd, fh->pad, i);
+			v4l2_subdev_get_fmt(sd, fh->pad, i);
 		struct v4l2_rect *try_crop =
-			v4l2_subdev_get_try_crop(sd, fh->pad, i);
+			v4l2_subdev_state_get_crop(sd, fh->pad, i);
 		struct v4l2_rect *try_compose =
-			v4l2_subdev_get_try_compose(sd, fh->pad, i);
+			v4l2_subdev_state_get_compose(sd, fh->pad, i);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
 		struct v4l2_mbus_framefmt *try_fmt =
-			v4l2_subdev_get_try_format(sd, fh->state, i);
+			v4l2_subdev_get_fmt(sd, fh->state, i);
 		struct v4l2_rect *try_crop =
-			v4l2_subdev_get_try_crop(sd, fh->state, i);
+			v4l2_subdev_state_get_crop(sd, fh->state, i);
 		struct v4l2_rect *try_compose =
-			v4l2_subdev_get_try_compose(sd, fh->state, i);
+			v4l2_subdev_state_get_compose(sd, fh->state, i);
 #else
 		struct v4l2_mbus_framefmt *try_fmt =
 			v4l2_subdev_state_get_format(fh->state, i);

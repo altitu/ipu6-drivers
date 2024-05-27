@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (c) 2022-2023 Intel Corporation.
 
+#include <media/v4l2-subdev.h>
 #include <asm/unaligned.h>
 #include <linux/acpi.h>
 #include <linux/clk.h>
@@ -859,7 +860,7 @@ static int ov08a10_set_format(struct v4l2_subdev *sd,
 	ov08a10_update_pad_format(mode, &fmt->format);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		*v4l2_subdev_get_try_format(sd, sd_state,
+		*v4l2_subdev_get_fmt(sd, sd_state,
 					    fmt->pad) = fmt->format;
 #else
 		*v4l2_subdev_state_get_format(sd_state,
@@ -898,7 +899,7 @@ static int ov08a10_get_format(struct v4l2_subdev *sd,
 	mutex_lock(&ov08a10->mutex);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY)
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		fmt->format = *v4l2_subdev_get_try_format(&ov08a10->sd,
+		fmt->format = *v4l2_subdev_get_fmt(&ov08a10->sd,
 							  sd_state,
 							  fmt->pad);
 #else
@@ -951,7 +952,7 @@ static int ov08a10_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	mutex_lock(&ov08a10->mutex);
 	ov08a10_update_pad_format(&supported_modes[0],
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-				  v4l2_subdev_get_try_format(sd, fh->state, 0));
+				  v4l2_subdev_get_fmt(sd, fh->state, 0));
 #else
 				  v4l2_subdev_state_get_format(fh->state, 0));
 #endif

@@ -1,4 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/#include <media/v4l2-subdev.h>
+* SPDX-License-Identifier: GPL-2.0 */
 /* Copyright (C) 2020 - 2024 Intel Corporation */
 
 #ifndef IPU6_ISYS_CSI2_H

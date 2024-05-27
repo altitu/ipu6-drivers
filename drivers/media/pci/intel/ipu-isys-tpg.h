@@ -4,6 +4,7 @@
 #ifndef IPU_ISYS_TPG_H
 #define IPU_ISYS_TPG_H
 
+#include <media/v4l2-subdev.h>
 #include <media/media-entity.h>
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-device.h>

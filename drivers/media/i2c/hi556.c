@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (c) 2019 Intel Corporation.
 
+#include <media/v4l2-subdev.h>
 #include <asm/unaligned.h>
 #include <linux/acpi.h>
 #include <linux/clk.h>
@@ -1066,9 +1067,9 @@ static int hi556_set_format(struct v4l2_subdev *sd,
 	hi556_assign_pad_format(mode, &fmt->format);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
-		*v4l2_subdev_get_try_format(sd, cfg, fmt->pad) = fmt->format;
+		*v4l2_subdev_get_fmt(sd, cfg, fmt->pad) = fmt->format;
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		*v4l2_subdev_get_try_format(sd, sd_state, fmt->pad) = fmt->format;
+		*v4l2_subdev_get_fmt(sd, sd_state, fmt->pad) = fmt->format;
 #else
 		*v4l2_subdev_state_get_format(sd_state, fmt->pad) = fmt->format;
 #endif
@@ -1111,9 +1112,9 @@ static int hi556_get_format(struct v4l2_subdev *sd,
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY)
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
 		fmt->format =
-			*v4l2_subdev_get_try_format(&hi556->sd, cfg, fmt->pad);
+			*v4l2_subdev_get_fmt(&hi556->sd, cfg, fmt->pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		fmt->format = *v4l2_subdev_get_try_format(&hi556->sd,
+		fmt->format = *v4l2_subdev_get_fmt(&hi556->sd,
 							  sd_state,
 							  fmt->pad);
 #else
@@ -1174,10 +1175,10 @@ static int hi556_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	mutex_lock(&hi556->mutex);
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
 	hi556_assign_pad_format(&supported_modes[0],
-				v4l2_subdev_get_try_format(sd, fh->pad, 0));
+				v4l2_subdev_get_fmt(sd, fh->pad, 0));
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
 	hi556_assign_pad_format(&supported_modes[0],
-				v4l2_subdev_get_try_format(sd, fh->state, 0));
+				v4l2_subdev_get_fmt(sd, fh->state, 0));
 #else
 	hi556_assign_pad_format(&supported_modes[0],
 				v4l2_subdev_state_get_format(fh->state, 0));

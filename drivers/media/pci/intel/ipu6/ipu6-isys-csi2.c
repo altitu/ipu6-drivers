@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (C) 2020 - 2024 Intel Corporation
 
+#include <media/v4l2-subdev.h>
 #include <linux/delay.h>
 #include <linux/spinlock.h>
 #include <media/ipu-isys.h>

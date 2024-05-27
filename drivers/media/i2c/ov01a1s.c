@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (c) 2020-2022 Intel Corporation.
 
+#include <media/v4l2-subdev.h>
 #include <asm/unaligned.h>
 #include <linux/acpi.h>
 #include <linux/delay.h>
@@ -840,9 +841,9 @@ static int ov01a1s_set_format(struct v4l2_subdev *sd,
 	ov01a1s_update_pad_format(mode, &fmt->format);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
-		*v4l2_subdev_get_try_format(sd, cfg, fmt->pad) = fmt->format;
+		*v4l2_subdev_get_fmt(sd, cfg, fmt->pad) = fmt->format;
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		*v4l2_subdev_get_try_format(sd, sd_state, fmt->pad) = fmt->format;
+		*v4l2_subdev_get_fmt(sd, sd_state, fmt->pad) = fmt->format;
 #else
 		*v4l2_subdev_state_get_format(sd_state, fmt->pad) = fmt->format;
 #endif
@@ -880,10 +881,10 @@ static int ov01a1s_get_format(struct v4l2_subdev *sd,
 	mutex_lock(&ov01a1s->mutex);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY)
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
-		fmt->format = *v4l2_subdev_get_try_format(&ov01a1s->sd, cfg,
+		fmt->format = *v4l2_subdev_get_fmt(&ov01a1s->sd, cfg,
 							  fmt->pad);
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		fmt->format = *v4l2_subdev_get_try_format(&ov01a1s->sd,
+		fmt->format = *v4l2_subdev_get_fmt(&ov01a1s->sd,
 							  sd_state, fmt->pad);
 #else
 		fmt->format = *v4l2_subdev_state_get_format(
@@ -942,10 +943,10 @@ static int ov01a1s_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	mutex_lock(&ov01a1s->mutex);
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
 	ov01a1s_update_pad_format(&supported_modes[0],
-				  v4l2_subdev_get_try_format(sd, fh->pad, 0));
+				  v4l2_subdev_get_fmt(sd, fh->pad, 0));
 #elif LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
 	ov01a1s_update_pad_format(&supported_modes[0],
-				  v4l2_subdev_get_try_format(sd, fh->state, 0));
+				  v4l2_subdev_get_fmt(sd, fh->state, 0));
 #else
 	ov01a1s_update_pad_format(&supported_modes[0],
 				  v4l2_subdev_state_get_format(fh->state, 0));

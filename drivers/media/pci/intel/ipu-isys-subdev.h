@@ -4,6 +4,7 @@
 #ifndef IPU_ISYS_SUBDEV_H
 #define IPU_ISYS_SUBDEV_H
 
+#include <media/v4l2-subdev.h>
 #include <linux/mutex.h>
 
 #include <media/media-entity.h>

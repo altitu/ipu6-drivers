@@ -24,7 +24,8 @@ index 2d48c94659a4..a6ac53e4fd89 100644
 @@ -2,6 +2,9 @@
  // Copyright (c) 2021 Intel Corporation.
  
- #include <linux/acpi.h>
+ #include <media/v4l2-subdev.h>
+#include <linux/acpi.h>
 +#include <linux/clk.h>
 +#include <linux/delay.h>
 +#include <linux/gpio/consumer.h>

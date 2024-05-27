@@ -1,4 +1,5 @@
-# SPDX-License-Identifier: GPL-2.0
+##include <linux/spi/spi.h>
+ SPDX-License-Identifier: GPL-2.0
 # Copyright (c) 2010 - 2020 Intel Corporation.
 
 # force check the compile warning to make sure zero warnings

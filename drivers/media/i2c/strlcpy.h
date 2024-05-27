@@ -3,6 +3,6 @@
 
 #include <linux/types.h>
 
-size_t strlcpy(char *dest, const char *src, size_t size);
+size_t strncpy(char *dest, const char *src, size_t size);
 
 #endif /* _STRLCPY_H_ */

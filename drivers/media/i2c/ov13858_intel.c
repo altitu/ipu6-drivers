@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (c) 2022 Intel Corporation.
 
+#include <media/v4l2-subdev.h>
 #include <linux/acpi.h>
 #include <linux/i2c.h>
 #include <linux/module.h>
@@ -1381,7 +1382,7 @@ static int ov13858_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 {
 	struct ov13858 *ov13858 = to_ov13858(sd);
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-	struct v4l2_mbus_framefmt *try_fmt = v4l2_subdev_get_try_format(sd,
+	struct v4l2_mbus_framefmt *try_fmt = v4l2_subdev_get_fmt(sd,
 									fh->pad,
 									0);
 #else
@@ -1570,7 +1571,7 @@ static int ov13858_do_get_pad_format(struct ov13858 *ov13858,
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		framefmt = v4l2_subdev_get_try_format(sd, cfg, fmt->pad);
+		framefmt = v4l2_subdev_get_fmt(sd, cfg, fmt->pad);
 #else
 		framefmt = v4l2_subdev_state_get_format(cfg, fmt->pad);
 #endif
@@ -1623,7 +1624,7 @@ ov13858_set_pad_format(struct v4l2_subdev *sd,
 	ov13858_update_pad_format(mode, fmt);
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 8, 0)
-		framefmt = v4l2_subdev_get_try_format(sd, cfg, fmt->pad);
+		framefmt = v4l2_subdev_get_fmt(sd, cfg, fmt->pad);
 #else
 		framefmt = v4l2_subdev_state_get_format(cfg, fmt->pad);
 #endif

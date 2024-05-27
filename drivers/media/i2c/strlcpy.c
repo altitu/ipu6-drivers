@@ -2,18 +2,18 @@
 #include <linux/string.h>
 
 /**
- * strlcpy - Copy a C-string into a sized buffer
+ * strncpy - Copy a C-string into a sized buffer
  * @dest: Where to copy the string to
  * @src: Where to copy the string from
  * @size: size of destination buffer
  *
- * Compatible with `strlcpy` from OpenBSD. Copies at most
+ * Compatible with `strncpy` from OpenBSD. Copies at most
  * size-1 bytes from @src to @dest, NUL-terminating the result.
  *
  * Returns the total length of the string it tried to create,
  * i.e. the length of @src.
  */
-size_t strlcpy(char *dest, const char *src, size_t size)
+size_t strncpy(char *dest, const char *src, size_t size)
 {
     size_t len = strlen(src);
     size_t ret = len;

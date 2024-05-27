@@ -1,4 +1,5 @@
-From a1e3360ca97c88a822e8c30b827c673de626b127 Mon Sep 17 00:00:00 2001
+F#include <linux/spi/spi.h>
+rom a1e3360ca97c88a822e8c30b827c673de626b127 Mon Sep 17 00:00:00 2001
 From: Sakari Ailus <sakari.ailus@linux.intel.com>
 Date: Mon, 18 Mar 2024 10:01:26 +0200
 Subject: [PATCH 5/5] mei: vsc: Unregister interrupt handler for system suspend

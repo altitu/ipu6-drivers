@@ -4,6 +4,7 @@
 #ifndef IPU_ISYS_MEDIA_H
 #define IPU_ISYS_MEDIA_H
 
+#include <media/v4l2-subdev.h>
 #include <linux/slab.h>
 #include <media/media-entity.h>
 
